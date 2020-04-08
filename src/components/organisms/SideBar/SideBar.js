@@ -45,13 +45,12 @@ const StyledLinksList = styled.ul`
   list-style: none;
 `;
 
-const Sidebar = () => (
-
-    <StyledWrapper>
+const Sidebar = ({ pageType }) => (
+    <StyledWrapper activeColor={pageType}>
         <StyledLogoLink to="/" />
         <StyledLinksList>
             <li>
-                <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeclass="active" />
+                <ButtonIcon exact as={NavLink} to="/" icon={penIcon} activeclass="active" />
             </li>
             <li>
                 <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeclass="active" />

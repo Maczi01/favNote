@@ -1,7 +1,17 @@
 import React from "react";
+import UserPageTemplate from "../templates/UserPageTemplate";
+import Card from "../components/molecules/Card";
 
 const Articles = () => (
-    <h1>Articles</h1>
+    <UserPageTemplate pageType='article'>
+            <Card cardType={"article"}/>
+            <Card cardType={"article"}/>
+            <Card cardType={"article"}/>
+            <Card cardType={"article"}/>
+            <Card cardType={"article"}/>
+            <Card cardType={"article"}/>
+            <Card cardType={"article"}/>
+    </UserPageTemplate>
 )
 
 export default Articles;

@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 import GlobalStyle from 'theme/GlobalStyle'
 import {ThemeProvider} from "styled-components";
 import {theme} from 'theme/mainTheme';
+import Sidebar from "../components/organisms/SideBar/SideBar";
 
 const MainTemplate = ({children}) => (
     <>
         <GlobalStyle/>
         <ThemeProvider theme={theme}>
-                {children}
+            <Sidebar/>
+            {children}
         </ThemeProvider>
     </>
 );

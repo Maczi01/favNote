@@ -21,8 +21,7 @@ const InnerWrapper = styled.div`
 margin: 0;
 position: relative;
 padding: 17px 30px;
-background-color: ${({activeColor, theme}) => activeColor ? theme[activeColor] : 'white'};
-
+background-color: ${({activeColor, theme}) => (activeColor ? theme[activeColor] : 'white')};
 :first-of-type{
 z-index: 99;
 }
@@ -71,14 +70,15 @@ top:25px;
 const Card = ({cardType}) => (
     <StyledWrappder>
         <InnerWrapper activeColor={cardType}>
-            <StyledHeading>Cześć Mati</StyledHeading>
-            <DateInfo>3 days </DateInfo>
-            {cardType === 'twitter' && <StyledAvatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQdu-QA0-l0OdbyEzcMJUJrC0Cu2mNO6k3U3REOmJmGoPcNEqfg&usqp=CAU"/>}
-            {cardType === 'article' && <StyledLink href="www.onet.pl"/>}
+            <StyledHeading>{title}</StyledHeading>
+            <DateInfo>{created}</DateInfo>
+            {cardType === 'twitter' && <StyledAvatar
+                src={twitterName}/>}
+            {cardType === 'article' && <StyledLink href={atricleUrl}/>}
         </InnerWrapper>
         <InnerWrapper>
             <Paragraph>
-                Frida miau miau Judka odpoczywa Mati koduje
+                {content}
             </Paragraph>
             <Button secondary>remove</Button>
         </InnerWrapper>
@@ -86,11 +86,18 @@ const Card = ({cardType}) => (
 );
 
 Card.propTypes = {
-    cardType: PropTypes.oneOf(['note', 'twitter', 'note'])
+    cardType: PropTypes.oneOf(['note', 'twitter', 'note']),
+    title: PropTypes.string.isRequired,
+    created: PropTypes.string.isRequired,
+    twitterName: PropTypes.string,
+    atricleUrl: PropTypes.string,
+    content: PropTypes.string.isRequired,
 };
 
 Card.defaultProps = {
-    cardType: 'note'
+    cardType: 'note',
+    twitterName: null,
+    atricleUrl: null,
 };
 
 export default Card;
