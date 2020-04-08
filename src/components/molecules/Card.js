@@ -5,6 +5,7 @@ import Paragraph from "../atoms/Paragraph/Paragraph";
 import Heading from "../atoms/Heading/Heading";
 import Button from "../atoms/Button/Button";
 import GlobalStyle from "../../theme/GlobalStyle";
+import LinkIcon from 'assets/icons/link.svg';
 
 const StyledWrappder = styled.div`
 min-height: 380px;
@@ -46,21 +47,34 @@ margin: 5px 0 0;
 const StyledAvatar = styled.img`
 width: 86px;
 height: 86px;
- border: 3px solid ${({theme}) => theme.twitter};
+ border: 5px solid ${({theme}) => theme.twitter};
 border-radius: 50px;
 position: absolute;
 right: 25px;
 top:25px;
 `;
 
+const StyledLink = styled.a`
+display:block;
+width: 47px;
+height: 47px;
+border-radius: 50px;
+background: white url(${LinkIcon}) no-repeat;
+background-size: 60%;
+background-position: 50%;
+position: absolute;
+right: 25px;
+top:25px;
+//transform: translateY(-50%);
+`
 
 const Card = ({cardType}) => (
     <StyledWrappder>
         <InnerWrapper activeColor={cardType}>
             <StyledHeading>Cześć Mati</StyledHeading>
             <DateInfo>3 days </DateInfo>
-           <StyledAvatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQdu-QA0-l0OdbyEzcMJUJrC0Cu2mNO6k3U3REOmJmGoPcNEqfg&usqp=CAU"
-                         activeColor={cardType}/>
+            {cardType === 'twitter' && <StyledAvatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQdu-QA0-l0OdbyEzcMJUJrC0Cu2mNO6k3U3REOmJmGoPcNEqfg&usqp=CAU"/>}
+            {cardType === 'article' && <StyledLink href="www.onet.pl"/>}
         </InnerWrapper>
         <InnerWrapper>
             <Paragraph>
