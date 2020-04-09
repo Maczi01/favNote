@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import React from "react";
-import PropTypes from 'prop-types'
-import logoIcon from 'assets/icons/logo.svg';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 import bulbIcon from 'assets/icons/bulb.svg';
 import logoutIcon from 'assets/icons/logout.svg';
 import penIcon from 'assets/icons/pen.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
-import ButtonIcon from "../../atoms/ButtonIcon/ButtonIcon";
-import {NavLink, Link} from "react-router-dom";
+import logoIcon from 'assets/icons/logo.svg';
 
 const StyledWrapper = styled.nav`
   position: fixed;
@@ -50,7 +50,7 @@ const Sidebar = ({ pageType }) => (
         <StyledLogoLink to="/" />
         <StyledLinksList>
             <li>
-                <ButtonIcon exact as={NavLink} to="/" icon={penIcon} activeclass="active" />
+                <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeclass="active" />
             </li>
             <li>
                 <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeclass="active" />
@@ -64,13 +64,11 @@ const Sidebar = ({ pageType }) => (
 );
 
 Sidebar.propTypes = {
-    pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+    pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 
 Sidebar.defaultProps = {
-    pageContext: 'notes',
+    pageType: 'notes',
 };
 
 export default Sidebar;
-{/*<StyledWrapper activeColor={pageContext}>*/}
-{/*    const Sidebar = ({ pageContext }) => (*/}
