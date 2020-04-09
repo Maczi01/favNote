@@ -97,22 +97,22 @@ class Card extends Component {
     }
 
     return (
-        <StyledWrapper onClick={this.handleCardClick}>
-          <InnerWrapper activeColor={pageContext}>
-            <StyledHeading>{title}</StyledHeading>
-            <DateInfo>{created}</DateInfo>
-            {pageContext === 'twitters' && (
-                <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
-            )}
-            {pageContext === 'articles' && <StyledLinkButton href={articleUrl} />}
-          </InnerWrapper>
-          <InnerWrapper flex>
-            <Paragraph>{content}</Paragraph>
-            <Button onClick={() => removeItem(pageContext, id)} secondary>
-              REMOVE
-            </Button>
-          </InnerWrapper>
-        </StyledWrapper>
+      <StyledWrapper onClick={this.handleCardClick}>
+        <InnerWrapper activeColor={pageContext}>
+          <StyledHeading>{title}</StyledHeading>
+          <DateInfo>{created}</DateInfo>
+          {pageContext === 'twitters' && (
+            <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
+          )}
+          {pageContext === 'articles' && <StyledLinkButton href={articleUrl} />}
+        </InnerWrapper>
+        <InnerWrapper flex>
+          <Paragraph>{content}</Paragraph>
+          <Button onClick={() => removeItem(pageContext, id)} secondary>
+            REMOVE
+          </Button>
+        </InnerWrapper>
+      </StyledWrapper>
     );
   }
 }
@@ -139,6 +139,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-    null,
-    mapDispatchToProps,
+  null,
+  mapDispatchToProps,
 )(withContext(Card));

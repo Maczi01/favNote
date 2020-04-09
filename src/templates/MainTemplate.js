@@ -1,52 +1,57 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types'
-import GlobalStyle from 'theme/GlobalStyle'
-import {ThemeProvider} from "styled-components";
-import {theme} from 'theme/mainTheme';
-import Sidebar from "../components/organisms/SideBar/SideBar";
-import {withRouter} from 'react-router'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyle from 'theme/GlobalStyle';
+import PageContext from 'context';
+import { theme } from 'theme/mainTheme';
 
 class MainTemplate extends Component {
+  state = {
+    pageType: 'notes',
+  };
 
-    state = {
-        pageType: 'notes',
-    }
+  componentDidMount() {
+    this.setCurrentPage();
+  }
 
-    componentDidMount() {
-        this.setCurrentPage()
-    }
+  componentDidUpdate(prevProps, prevState) {
+    this.setCurrentPage(prevState);
+  }
 
-    componentDidUpdate(prevProps, prevState) {
-        this.setCurrentPage()
-    }
+  setCurrentPage = (prevState = '') => {
+    const pageTypes = ['twitters', 'articles', 'notes'];
+    const {
+      location: { pathname },
+    } = this.props;
 
-    setCurrentPage = (prevState = '') => {
-        const pageTypes = ['twitters', 'articles', 'notes'];
-        const {
-            location: {pathname},
-        } = this.props
-        const currentPage = pageTypes.filter(page => pathname.includes(page))
-        console.log(currentPage)
-        if (prevState.pageType !== '') {
-            this.setState({pageType: currentPage})
-        }
-    }
+    const [currentPage] = pageTypes.filter(page => pathname.includes(page));
 
-    render() {
-        const {children} = this.props
-        return (
-            <>
-                <GlobalStyle/>
-                <ThemeProvider theme={theme}>
-                    <Sidebar/>
-                    {children}
-                </ThemeProvider>
-            </>
-        )
+    if (prevState.pageType !== currentPage) {
+      this.setState({ pageType: currentPage });
     }
+  };
+
+  render() {
+    const { children } = this.props;
+    const { pageType } = this.state;
+
+    return (
+      <div>
+        <PageContext.Provider value={pageType}>
+          <GlobalStyle />
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </PageContext.Provider>
+      </div>
+    );
+  }
 }
 
 MainTemplate.propTypes = {
-    children: PropTypes.element.isRequired
-}
+  children: PropTypes.element.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 export default withRouter(MainTemplate);
